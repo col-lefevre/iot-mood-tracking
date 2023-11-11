@@ -6,6 +6,11 @@ const globalStyles = StyleSheet.create({
         justifyContent: "flex-start",
         alignItems: "center",
     },
+    flatList: {
+        marginHorizontal: 20,
+        flexGrow: 0,
+        marginVertical: 10,
+    },
 });
 
 export { globalStyles };

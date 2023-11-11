@@ -8,27 +8,26 @@ export default function ViewData({ navigation }) {
     const [data, setData] = useState([]);
 
     useEffect(() => {
-        async function fetchData() {
-            const { data, error } = await supabase
-                .from("mood_tracking")
-                .select("*");
-
-            if (error) {
-                console.error("Error fetching data:", error.message);
-            } else {
-                setData(data);
-            }
-        }
-
         fetchData();
     }, []);
+
+    async function fetchData() {
+        const { data, error } = await supabase
+            .from("mood_tracking")
+            .select("*");
+        if (error) {
+            console.error("Error fetching data:", error.message);
+        } else {
+            setData(data);
+        }
+    }
 
     return (
         <View style={globalStyles.container}>
             <Text>Supabase Data:</Text>
             <FlatList
                 data={data}
-                style={styles.flatList}
+                style={globalStyles.flatList}
                 renderItem={({ item }) => (
                     <FlatListEntry
                         mood_time={item.created_at}
@@ -69,10 +68,6 @@ function formatTime(timestamp) {
 }
 
 const styles = StyleSheet.create({
-    flatList: {
-        marginHorizontal: 20,
-        flexGrow: 0,
-    },
     flatListEntry: {
         flexDirection: "row",
         gap: 10,

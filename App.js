@@ -9,11 +9,11 @@ const Stack = createStackNavigator();
 function MyStack() {
     return (
         <Stack.Navigator
-            initialRouteName="ViewData"
+            initialRouteName="ChangeMoods"
             screenOptions={{
                 headerShown: true,
                 headerBackVisible: false,
-                headerLeft: null, // Remove back button
+                headerLeft: null,
             }}
         >
             <Stack.Screen name="ViewData" component={ViewData} />
