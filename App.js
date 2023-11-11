@@ -9,7 +9,7 @@ const Stack = createStackNavigator();
 function MyStack() {
     return (
         <Stack.Navigator
-            initialRouteName="ChangeMoods"
+            initialRouteName="ViewData"
             screenOptions={{
                 headerShown: true,
                 headerBackVisible: false,

@@ -1,26 +1,26 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, FlatList, Button } from "react-native";
 
-import { supabase } from "../modules/supabase";
+import { fetchData } from "../modules/supabase";
 import { globalStyles } from "../modules/globalStyles";
 
 export default function ViewData({ navigation }) {
     const [data, setData] = useState([]);
 
     useEffect(() => {
-        fetchData();
+        fetchData(setData, "mood_tracking");
     }, []);
 
-    async function fetchData() {
-        const { data, error } = await supabase
-            .from("mood_tracking")
-            .select("*");
-        if (error) {
-            console.error("Error fetching data:", error.message);
-        } else {
-            setData(data);
-        }
-    }
+    // async function fetchData() {
+    //     const { data, error } = await supabase
+    //         .from("mood_tracking")
+    //         .select("*");
+    //     if (error) {
+    //         console.error("Error fetching data:", error.message);
+    //     } else {
+    //         setData(data);
+    //     }
+    // }
 
     return (
         <View style={globalStyles.container}>

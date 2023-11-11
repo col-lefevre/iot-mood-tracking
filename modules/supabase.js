@@ -7,4 +7,14 @@ const supabase = createClient(
     process.env.EXPO_PUBLIC_SUPABASE_KEY
 );
 
-export { supabase };
+async function fetchData(setData, tableName) {
+    const { data, error } = await supabase.from(tableName).select("*");
+    if (error) {
+        console.error("Error fetching data:", error.message);
+    } else {
+        let sortedData = data.sort((a, b) => a.id - b.id);
+        setData(sortedData);
+    }
+}
+
+export { supabase, fetchData };

@@ -2,39 +2,28 @@ import { View, Text, Button, FlatList, TextInput } from "react-native";
 import { useEffect, useState } from "react";
 
 import { globalStyles } from "../modules/globalStyles";
-import { supabase } from "../modules/supabase";
+import { fetchData, supabase } from "../modules/supabase";
 
 export default function ChangeMoods({ navigation }) {
     const [data, setData] = useState([]);
 
     useEffect(() => {
-        fetchData();
+        fetchData(setData, "mood_values");
     }, []);
 
-    async function fetchData() {
-        const { data, error } = await supabase.from("mood_values").select("*");
-        if (error) {
-            console.error("Error fetching data:", error.message);
-        } else {
-            let sortedData = data.sort((a, b) => a.mood_num - b.mood_num);
-            setData(sortedData);
-        }
-    }
-
-    async function updateRow(moodNum, moodName) {
-        let rowData = { mood_num: moodNum, mood_name: moodName };
+    async function updateRow(id, mood_name) {
+        let rowData = { id: id, mood_name: mood_name };
         try {
             const { error } = await supabase
                 .from("mood_values")
                 .update(rowData)
-                .eq("mood_num", rowData.mood_num)
+                .eq("id", rowData.id)
                 .single();
             if (error) {
                 console.error("Error updating data:", error.message);
             } else {
                 console.log("Data updated successfully");
-                fetchData();
-                console.log(`${moodNum} | ${moodName}`);
+                fetchData(setData, "mood_values");
             }
         } catch (error) {
             console.error("Error updating data:", error.message);
@@ -45,14 +34,15 @@ export default function ChangeMoods({ navigation }) {
         <View style={globalStyles.container}>
             <FlatList
                 data={data}
+                style={globalStyles.flatList}
                 renderItem={({ item }) => (
                     <FlatListEntry
-                        mood_num={item.mood_num}
+                        id={item.id}
                         mood_name={item.mood_name}
                         updateRow={updateRow}
                     />
                 )}
-                keyExtractor={(item) => item.mood_num.toString()}
+                keyExtractor={(item) => item.id.toString()}
             />
             <Button
                 onPress={() => navigation.navigate("ViewData")}
@@ -62,7 +52,7 @@ export default function ChangeMoods({ navigation }) {
     );
 }
 
-function FlatListEntry({ mood_name, mood_num, updateRow }) {
+function FlatListEntry({ mood_name, id, updateRow }) {
     const [text, setText] = useState("");
 
     return (
@@ -74,10 +64,7 @@ function FlatListEntry({ mood_name, mood_num, updateRow }) {
                 maxLength={20}
             />
             <Text>{`${text.length} / 20`}</Text>
-            <Button
-                onPress={() => updateRow(mood_num, text)}
-                title={"Submit"}
-            />
+            <Button onPress={() => updateRow(id, text)} title={"Submit"} />
         </View>
     );
 }
