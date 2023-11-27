@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { globalStyles } from "../modules/globalStyles";
 import { fetchData, supabase } from "../modules/supabase";
 
-export default function ChangeMoods({ navigation }) {
+export default function ChangeMoods() {
     const [data, setData] = useState([]);
 
     useEffect(() => {
@@ -43,10 +43,6 @@ export default function ChangeMoods({ navigation }) {
                     />
                 )}
                 keyExtractor={(item) => item.id.toString()}
-            />
-            <Button
-                onPress={() => navigation.navigate("ViewData")}
-                title={"View Data"}
             />
         </View>
     );

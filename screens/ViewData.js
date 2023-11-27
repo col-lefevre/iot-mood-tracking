@@ -4,26 +4,21 @@ import { View, Text, StyleSheet, FlatList, Button } from "react-native";
 import { fetchData } from "../modules/supabase";
 import { globalStyles } from "../modules/globalStyles";
 
-export default function ViewData({ navigation }) {
+export default function ViewData() {
     const [data, setData] = useState([]);
+    // const [reload, setReload] = useState(false); // dummy var to trigger useEffect
 
     useEffect(() => {
-        fetchData(setData, "mood_tracking");
+        getTrackingData();
     }, []);
 
-    // async function fetchData() {
-    //     const { data, error } = await supabase
-    //         .from("mood_tracking")
-    //         .select("*");
-    //     if (error) {
-    //         console.error("Error fetching data:", error.message);
-    //     } else {
-    //         setData(data);
-    //     }
-    // }
+    function getTrackingData() {
+        fetchData(setData, "mood_tracking");
+    }
 
     return (
         <View style={globalStyles.container}>
+            <Button onPress={getTrackingData} title={"Refresh Data"} />
             <Text>Supabase Data:</Text>
             <FlatList
                 data={data}
@@ -35,10 +30,6 @@ export default function ViewData({ navigation }) {
                     />
                 )}
                 keyExtractor={(item) => item.id.toString()}
-            />
-            <Button
-                onPress={() => navigation.navigate("ChangeMoods")}
-                title={"Change Moods"}
             />
         </View>
     );
