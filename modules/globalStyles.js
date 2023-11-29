@@ -4,12 +4,7 @@ const globalStyles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: "flex-start",
-        alignItems: "center",
-    },
-    flatList: {
-        marginHorizontal: 20,
-        flexGrow: 0,
-        marginVertical: 10,
+        backgroundColor: "#121212",
     },
 });
 

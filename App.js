@@ -1,37 +1,11 @@
+import { StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
-// import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
 import ViewData from "./screens/ViewData";
 import ChangeMoods from "./screens/ChangeMoods";
 import ViewInfo from "./screens/ViewInfo";
-
-// const Stack = createStackNavigator();
-
-// function MyStack() {
-//     return (
-//         <Stack.Navigator
-//             initialRouteName="ViewData"
-//             screenOptions={{
-//                 headerShown: true,
-//                 headerBackVisible: false,
-//                 headerLeft: null,
-//             }}
-//         >
-//             <Stack.Screen name="ViewData" component={ViewData} />
-//             <Stack.Screen name="ChangeMoods" component={ChangeMoods} />
-//         </Stack.Navigator>
-//     );
-// }
-
-// export default function App() {
-//     return (
-//         <NavigationContainer>
-//             <MyStack />
-//         </NavigationContainer>
-//     );
-// }
 
 const Tab = createBottomTabNavigator();
 
@@ -63,14 +37,45 @@ export default function App() {
                             />
                         );
                     },
-                    tabBarActiveTintColor: "blue",
-                    tabBarInactiveTintColor: "gray",
+                    tabBarActiveTintColor: "white",
+                    tabBarInactiveTintColor: "grey",
+                    tabBarStyle: {
+                        backgroundColor: "#000000",
+                        color: "white",
+                        borderTopColor: "#000000",
+                        fontSize: 20,
+                    },
                 })}
             >
-                <Tab.Screen name="Info" component={ViewInfo} />
-                <Tab.Screen name="Tracking" component={ViewData} />
-                <Tab.Screen name="Moods" component={ChangeMoods} />
+                <Tab.Screen
+                    name="Info"
+                    component={ViewInfo}
+                    options={styles.tabScreen}
+                />
+                <Tab.Screen
+                    name="Tracking"
+                    component={ViewData}
+                    options={styles.tabScreen}
+                />
+                <Tab.Screen
+                    name="Moods"
+                    component={ChangeMoods}
+                    options={styles.tabScreen}
+                />
             </Tab.Navigator>
         </NavigationContainer>
     );
 }
+
+const styles = StyleSheet.create({
+    tabScreen: {
+        headerStyle: {
+            backgroundColor: "#000000",
+        },
+        headerTintColor: "white",
+        headerTitleStyle: {
+            fontWeight: "bold",
+        },
+        headerShadowVisible: false,
+    },
+});
