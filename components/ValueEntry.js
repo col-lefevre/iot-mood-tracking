@@ -44,7 +44,7 @@ export function ValueEntry({ mood_name, id, updateRow }) {
                     {capitalizeFirstLetter(mood_name)}
                 </Text>
             </View>
-            <Text style={styles.subtitle}>{subtitleText} Mood</Text>
+            <Text style={globalStyles.lightGreyColor}>{subtitleText} Mood</Text>
             <View style={styles.inputContainer}>
                 <TextInput
                     placeholder={`Enter replacement for "${mood_name}"`}
@@ -88,9 +88,6 @@ const styles = StyleSheet.create({
         letterSpacing: 1,
         fontSize: 20,
         color: "white",
-    },
-    subtitle: {
-        color: "#DEDEDE",
     },
     customButton: {
         padding: 5,

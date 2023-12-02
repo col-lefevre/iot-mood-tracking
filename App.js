@@ -3,12 +3,12 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 
-import { faCircleInfo } from "@fortawesome/free-solid-svg-icons/faCircleInfo";
 import { faChartSimple } from "@fortawesome/free-solid-svg-icons/faChartSimple";
 import { faFaceSmile } from "@fortawesome/free-solid-svg-icons/faFaceSmile";
 
 import ViewData from "./screens/ViewData";
 import ChangeMoods from "./screens/ChangeMoods";
+import HeaderTitle from "./components/HeaderTitle";
 
 const Tab = createBottomTabNavigator();
 
@@ -17,7 +17,7 @@ export default function App() {
         <NavigationContainer>
             <Tab.Navigator
                 screenOptions={({ route }) => ({
-                    tabBarIcon: ({ focused, color, size }) => {
+                    tabBarIcon: ({ color, size }) => {
                         let iconName;
 
                         if (route.name === "Tracking") {
@@ -53,12 +53,30 @@ export default function App() {
                 <Tab.Screen
                     name="Tracking"
                     component={ViewData}
-                    options={styles.tabScreen}
+                    options={{
+                        headerStyle: styles.headerStyle,
+                        headerTitle: () => (
+                            <HeaderTitle
+                                title={"Tracking"}
+                                subtitle={"View the moods you've tracked."}
+                            />
+                        ),
+                    }}
                 />
                 <Tab.Screen
                     name="Moods"
                     component={ChangeMoods}
-                    options={styles.tabScreen}
+                    options={{
+                        headerStyle: styles.headerStyle,
+                        headerTitle: () => (
+                            <HeaderTitle
+                                title={"Moods"}
+                                subtitle={
+                                    "Change the moods recorded by the buttons."
+                                }
+                            />
+                        ),
+                    }}
                 />
             </Tab.Navigator>
         </NavigationContainer>
@@ -66,14 +84,8 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
-    tabScreen: {
-        headerStyle: {
-            backgroundColor: "#000000",
-        },
-        headerTintColor: "white",
-        headerTitleStyle: {
-            fontWeight: "regular",
-        },
-        headerShadowVisible: false,
+    headerStyle: {
+        backgroundColor: "#000000",
+        height: 130,
     },
 });

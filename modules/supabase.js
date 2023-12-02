@@ -38,7 +38,7 @@ async function deleteData(tableName, id) {
 
 // Sets specific mood value in mood_values table
 async function updateMoodValue(id, mood_name) {
-    let rowData = { id: id, mood_name: mood_name };
+    let rowData = { id: id, mood_name: capitalizeFirstLetter(mood_name) };
     try {
         const { error } = await supabase
             .from("mood_values")
@@ -53,6 +53,15 @@ async function updateMoodValue(id, mood_name) {
     } catch (error) {
         console.error("Error updating data:", error.message);
     }
+}
+
+// Clean user input
+function capitalizeFirstLetter(str) {
+    if (typeof str !== "string" || str.length === 0) {
+        return str;
+    }
+
+    return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
 }
 
 export { supabase, fetchData, deleteData, updateMoodValue };

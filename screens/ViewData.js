@@ -9,12 +9,29 @@ import { globalStyles } from "../modules/globalStyles";
 
 import { TrackedEntry } from "../components/TrackedEntry";
 
-function ViewData() {
+function ViewData({ navigation }) {
     const [data, setData] = useState([]);
 
     useEffect(() => {
         getTrackingData();
     }, []);
+
+    useEffect(() => {
+        navigation.setOptions({
+            headerRight: () => (
+                <TouchableOpacity
+                    style={styles.refreshIcon}
+                    onPress={getTrackingData}
+                >
+                    <FontAwesomeIcon
+                        icon={faArrowsRotate}
+                        size={20}
+                        color={"white"}
+                    />
+                </TouchableOpacity>
+            ),
+        });
+    }, [navigation]);
 
     function getTrackingData() {
         fetchData(setData, "mood_tracking");
@@ -47,7 +64,12 @@ function ViewData() {
 const styles = StyleSheet.create({
     flatList: {
         flex: 1,
-        paddingHorizontal: 20,
+    },
+    refreshIcon: {
+        padding: 5,
+        marginRight: 20,
+        flex: 1,
+        justifyContent: "center",
     },
 });
 

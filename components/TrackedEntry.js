@@ -46,7 +46,7 @@ function IconText({ text, icon_name }) {
     return (
         <View style={styles.iconTextContainer}>
             <FontAwesomeIcon icon={icon_name} size={17.5} color={"white"} />
-            <Text style={styles.itText}>{text}</Text>
+            <Text style={globalStyles.lightGreyColor}>{text}</Text>
         </View>
     );
 }
@@ -102,9 +102,6 @@ const styles = StyleSheet.create({
         gap: 5,
         justifyContent: "flex-start",
         alignItems: "center",
-    },
-    itText: {
-        color: "#DEDEDE",
     },
     moodContainer: {
         flexDirection: "row",
