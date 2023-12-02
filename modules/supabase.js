@@ -14,7 +14,45 @@ async function fetchData(setData, tableName) {
     } else {
         let sortedData = data.sort((a, b) => a.id - b.id);
         setData(sortedData);
+        console.log("Data fetched successfully");
     }
 }
 
-export { supabase, fetchData };
+// Deletes row with specified from specified table
+async function deleteData(tableName, id) {
+    try {
+        const { data, error } = await supabase
+            .from(tableName)
+            .delete()
+            .eq("id", id);
+
+        if (error) {
+            console.error("Error deleting: ", error.message);
+        } else {
+            console.log("Data deleted successfully");
+        }
+    } catch (error) {
+        console.error("Error deleting data:", error.message);
+    }
+}
+
+// Sets specific mood value in mood_values table
+async function updateMoodValue(id, mood_name) {
+    let rowData = { id: id, mood_name: mood_name };
+    try {
+        const { error } = await supabase
+            .from("mood_values")
+            .update(rowData)
+            .eq("id", rowData.id)
+            .single();
+        if (error) {
+            console.error("Error updating data:", error.message);
+        } else {
+            console.log("Data updated successfully");
+        }
+    } catch (error) {
+        console.error("Error updating data:", error.message);
+    }
+}
+
+export { supabase, fetchData, deleteData, updateMoodValue };

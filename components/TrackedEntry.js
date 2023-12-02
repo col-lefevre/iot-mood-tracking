@@ -1,4 +1,4 @@
-import { Text, StyleSheet, View } from "react-native";
+import { Text, StyleSheet, View, TouchableOpacity } from "react-native";
 
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faFaceSmile } from "@fortawesome/free-regular-svg-icons/faFaceSmile";
@@ -6,38 +6,38 @@ import { faFaceMeh } from "@fortawesome/free-regular-svg-icons/faFaceMeh";
 import { faFaceFrown } from "@fortawesome/free-regular-svg-icons/faFaceFrown";
 import { faClock } from "@fortawesome/free-regular-svg-icons/faClock";
 import { faCalendar } from "@fortawesome/free-regular-svg-icons/faCalendar";
+import { faTrash } from "@fortawesome/free-solid-svg-icons/faTrash";
 
 import { globalStyles } from "../modules/globalStyles";
 
-export function MoodEntry({ mood_name, mood_num, mood_date }) {
+export function TrackedEntry({ mood_name, mood_num, mood_date, trashFunc }) {
     let icon_name;
     let entry_color;
-    let entry_valence;
 
     if (mood_num == 1) {
         icon_name = faFaceSmile;
         entry_color = globalStyles.greenBackground;
-        entry_valence = "Positive";
     } else if (mood_num == 2) {
         icon_name = faFaceMeh;
         entry_color = globalStyles.yellowBackground;
-        entry_valence = "Neutral";
     } else if (mood_num == 3) {
         icon_name = faFaceFrown;
         entry_color = globalStyles.redBackground;
-        entry_valence = "Negative";
     }
 
     return (
         <View style={[styles.entryContainer, entry_color]}>
-            <Text style={styles.moodName}>
-                {capitalizeFirstLetter(mood_name)}
-            </Text>
             <View style={styles.infoContainer}>
-                <IconText text={entry_valence} icon_name={icon_name} />
+                <IconText
+                    text={capitalizeFirstLetter(mood_name)}
+                    icon_name={icon_name}
+                />
                 <IconText text={getTime(mood_date)} icon_name={faClock} />
                 <IconText text={getDate(mood_date)} icon_name={faCalendar} />
             </View>
+            <TouchableOpacity onPress={trashFunc}>
+                <FontAwesomeIcon icon={faTrash} size={17.5} color={"white"} />
+            </TouchableOpacity>
         </View>
     );
 }
@@ -76,15 +76,14 @@ function capitalizeFirstLetter(str) {
 
 const styles = StyleSheet.create({
     entryContainer: {
-        paddingVertical: 20,
-        paddingHorizontal: 25,
+        paddingVertical: 15,
+        paddingHorizontal: 20,
         opacity: 1,
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "flex-start",
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
         marginVertical: 10,
         borderRadius: 10,
-        gap: 5,
         width: "100%",
     },
     moodName: {
@@ -105,6 +104,12 @@ const styles = StyleSheet.create({
         alignItems: "center",
     },
     itText: {
-        color: "#eaeaea",
+        color: "#DEDEDE",
+    },
+    moodContainer: {
+        flexDirection: "row",
+        gap: 7.5,
+        alignItems: "center",
+        justifyContent: "flex-start",
     },
 });
