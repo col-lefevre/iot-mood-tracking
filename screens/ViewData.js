@@ -1,15 +1,33 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet, FlatList, Button } from "react-native";
+import { View, TouchableOpacity, StyleSheet, FlatList } from "react-native";
+
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { faArrowsRotate } from "@fortawesome/free-solid-svg-icons/faArrowsRotate";
 
 import { fetchData } from "../modules/supabase";
 import { globalStyles } from "../modules/globalStyles";
 
 import { MoodEntry } from "../components/MoodEntry";
 
-export default function ViewData() {
+function ViewData({ navigation }) {
     const [data, setData] = useState([]);
 
     useEffect(() => {
+        navigation.setOptions({
+            headerRight: () => (
+                <TouchableOpacity
+                    onPress={getTrackingData}
+                    style={{ padding: 7.5 }}
+                >
+                    <FontAwesomeIcon
+                        icon={faArrowsRotate}
+                        color={"white"}
+                        size={18}
+                        style={{ marginRight: 7.5 }}
+                    />
+                </TouchableOpacity>
+            ),
+        });
         getTrackingData();
     }, []);
 
@@ -19,7 +37,6 @@ export default function ViewData() {
 
     return (
         <View style={globalStyles.container}>
-            <Button onPress={getTrackingData} title={"Refresh Data"} />
             <FlatList
                 data={data}
                 style={styles.flatList}
@@ -42,3 +59,5 @@ const styles = StyleSheet.create({
         paddingHorizontal: 20,
     },
 });
+
+export default ViewData;

@@ -7,6 +7,8 @@ import { faFaceFrown } from "@fortawesome/free-regular-svg-icons/faFaceFrown";
 import { faClock } from "@fortawesome/free-regular-svg-icons/faClock";
 import { faCalendar } from "@fortawesome/free-regular-svg-icons/faCalendar";
 
+import { globalStyles } from "../modules/globalStyles";
+
 export function MoodEntry({ mood_name, mood_num, mood_date }) {
     let icon_name;
     let entry_color;
@@ -14,15 +16,15 @@ export function MoodEntry({ mood_name, mood_num, mood_date }) {
 
     if (mood_num == 1) {
         icon_name = faFaceSmile;
-        entry_color = styles.greenBackground;
+        entry_color = globalStyles.greenBackground;
         entry_valence = "Positive";
     } else if (mood_num == 2) {
         icon_name = faFaceMeh;
-        entry_color = styles.yellowBackground;
+        entry_color = globalStyles.yellowBackground;
         entry_valence = "Neutral";
     } else if (mood_num == 3) {
         icon_name = faFaceFrown;
-        entry_color = styles.redBackground;
+        entry_color = globalStyles.redBackground;
         entry_valence = "Negative";
     }
 
@@ -76,7 +78,7 @@ const styles = StyleSheet.create({
     entryContainer: {
         paddingVertical: 20,
         paddingHorizontal: 25,
-        opacity: 0.75,
+        opacity: 1,
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "flex-start",
@@ -85,9 +87,6 @@ const styles = StyleSheet.create({
         gap: 5,
         width: "100%",
     },
-    redBackground: { backgroundColor: "#DC143C" },
-    yellowBackground: { backgroundColor: "#FFA500" },
-    greenBackground: { backgroundColor: "#2E8B57" },
     moodName: {
         color: "white",
         letterSpacing: 2,

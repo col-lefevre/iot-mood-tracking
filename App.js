@@ -1,11 +1,14 @@
 import { StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import Ionicons from "@expo/vector-icons/Ionicons";
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+
+import { faCircleInfo } from "@fortawesome/free-solid-svg-icons/faCircleInfo";
+import { faChartSimple } from "@fortawesome/free-solid-svg-icons/faChartSimple";
+import { faFaceSmile } from "@fortawesome/free-solid-svg-icons/faFaceSmile";
 
 import ViewData from "./screens/ViewData";
 import ChangeMoods from "./screens/ChangeMoods";
-import ViewInfo from "./screens/ViewInfo";
 
 const Tab = createBottomTabNavigator();
 
@@ -17,21 +20,15 @@ export default function App() {
                     tabBarIcon: ({ focused, color, size }) => {
                         let iconName;
 
-                        if (route.name === "Info") {
-                            iconName = focused
-                                ? "information-circle"
-                                : "information-circle-outline";
-                        } else if (route.name === "Tracking") {
-                            iconName = focused
-                                ? "analytics"
-                                : "analytics-outline";
+                        if (route.name === "Tracking") {
+                            iconName = faChartSimple;
                         } else if (route.name === "Moods") {
-                            iconName = focused ? "happy" : "happy-outline";
+                            iconName = faFaceSmile;
                         }
 
                         return (
-                            <Ionicons
-                                name={iconName}
+                            <FontAwesomeIcon
+                                icon={iconName}
                                 size={size}
                                 color={color}
                             />
@@ -40,18 +37,19 @@ export default function App() {
                     tabBarActiveTintColor: "white",
                     tabBarInactiveTintColor: "grey",
                     tabBarStyle: {
-                        backgroundColor: "#000000",
-                        color: "white",
-                        borderTopColor: "#000000",
+                        backgroundColor: "black",
+                        borderTopColor: "black",
+                        borderTopWidth: 1.5,
                         fontSize: 20,
+                        height: 60,
+                        paddingVertical: 7,
+                    },
+                    tabBarLabelStyle: {
+                        fontSize: 13,
+                        letterSpacing: 0.5,
                     },
                 })}
             >
-                <Tab.Screen
-                    name="Info"
-                    component={ViewInfo}
-                    options={styles.tabScreen}
-                />
                 <Tab.Screen
                     name="Tracking"
                     component={ViewData}
@@ -74,7 +72,7 @@ const styles = StyleSheet.create({
         },
         headerTintColor: "white",
         headerTitleStyle: {
-            fontWeight: "bold",
+            fontWeight: "regular",
         },
         headerShadowVisible: false,
     },
