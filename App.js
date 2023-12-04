@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Platform } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
@@ -39,10 +39,18 @@ export default function App() {
                     tabBarStyle: {
                         backgroundColor: "black",
                         borderTopColor: "black",
-                        borderTopWidth: 1.5,
+                        borderTopWidth: 0,
                         fontSize: 20,
-                        height: 60,
-                        paddingVertical: 7,
+                        // ...Platform.select({
+                        //     android: {
+                        //         height: 55,
+                        //     },
+                        //     ios: {
+                        //         height: 70,
+                        //     },
+                        // }),
+                        // height: 60,
+                        // paddingVertical: 7,
                     },
                     tabBarLabelStyle: {
                         fontSize: 13,
@@ -61,6 +69,7 @@ export default function App() {
                                 subtitle={"View the moods you've tracked."}
                             />
                         ),
+                        headerTitleAlign: "left",
                     }}
                 />
                 <Tab.Screen
@@ -76,6 +85,7 @@ export default function App() {
                                 }
                             />
                         ),
+                        headerTitleAlign: "left",
                     }}
                 />
             </Tab.Navigator>
@@ -86,6 +96,8 @@ export default function App() {
 const styles = StyleSheet.create({
     headerStyle: {
         backgroundColor: "#000000",
-        height: 130,
+        height: 120,
+        elevation: 0, // This removes the shadow on Android
+        shadowOpacity: 0, // This removes the shadow on iOS
     },
 });
