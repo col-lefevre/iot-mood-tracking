@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     refreshIcon: {
-        padding: 5,
+        padding: 15,
         marginRight: 20,
         flex: 1,
         justifyContent: "center",

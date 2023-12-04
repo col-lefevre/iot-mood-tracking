@@ -35,7 +35,7 @@ export function TrackedEntry({ mood_name, mood_num, mood_date, trashFunc }) {
                 <IconText text={getTime(mood_date)} icon_name={faClock} />
                 <IconText text={getDate(mood_date)} icon_name={faCalendar} />
             </View>
-            <TouchableOpacity onPress={trashFunc}>
+            <TouchableOpacity onPress={trashFunc} style={styles.trashWrap}>
                 <FontAwesomeIcon icon={faTrash} size={17.5} color={"white"} />
             </TouchableOpacity>
         </View>
@@ -76,8 +76,9 @@ function capitalizeFirstLetter(str) {
 
 const styles = StyleSheet.create({
     entryContainer: {
-        paddingVertical: 15,
-        paddingHorizontal: 20,
+        paddingVertical: 5,
+        paddingRight: 5,
+        paddingLeft: 20,
         opacity: 1,
         flexDirection: "row",
         justifyContent: "space-between",
@@ -108,5 +109,8 @@ const styles = StyleSheet.create({
         gap: 7.5,
         alignItems: "center",
         justifyContent: "flex-start",
+    },
+    trashWrap: {
+        padding: 10,
     },
 });
