@@ -4,7 +4,7 @@ const globalStyles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: "flex-start",
-        backgroundColor: "#121212",
+        backgroundColor: "#252424",
     },
     redBackground: { backgroundColor: "rgb(191, 21, 55)" }, // #BF1537
     yellowBackground: { backgroundColor: "rgb(221, 144, 4)" }, // #DD9004
