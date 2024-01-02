@@ -1,10 +1,10 @@
 ## Overview
 
-MoodMap is an Internet of Things mood tracker which I created as an Informatics Undergradate student at Indiana University, specifically for I341 Prototyping with Arduino Tools. My main objective was applying my experience with digital UX/UI design to physical prototyping. The result was a physical mood tracking device powered by an ESP32, and a companion mobile app built in React Native.
+MoodMap is an Internet of Things mood tracker which I created as an Informatics Undergradate student at Indiana University, specifically for I341 Prototyping with Arduino Tools. My main objective was applying my experience with digital UX/UI design to physical prototyping. The result was a physical mood tracking device and a companion mobile app.
 
 ## Features
 
-Together, MoodMap and its companion app allow the user to:
+MoodMap is comprised of a physical device and a companion mobile app. Users can:
 - [MoodMap] Record their moods on a 3-point spectrum
 - [App] Review tracked moods
 - [App] Change the moods being tracked
